@@ -1,12 +1,11 @@
 # Если используете IP-адрес без домена:
-:80 {
+ {
     # Раздача статики фронтенда из папки frontend
-    root * /usr/share/caddy
+    root * /usr/share/caddy/
     file_server
 
-    # Перенаправление всех запросов к API на контейнер FastAPI
-    # ВАЖНО: Если у вас в FastAPI эндпоинты объявлены с префиксом /api (например @app.get("/api/dishes")),
-    # используйте `reverse_proxy /api/* backend:8000`
-    handle_path /api/* { reverse_proxy backend:8000 }
+    handle_path /api/* {
+        reverse_proxy backend:8000 
+    }
 }
 

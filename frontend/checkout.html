@@ -4,10 +4,10 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Ресторан "Военмех .ЕДА"</title>
-  <link rel="stylesheet" href="../css/style.css">
-  <script src="../js/cart.js" defer></script>
-  <script src="../js/auth.js" defer></script>
-
+  <link rel="stylesheet" href="/css/style.css">
+  <script src="/js/cart.js" defer></script>
+  <script src="/js/checkout.js" defer></script>
+  <script src="/js/auth.js" defer></script>
 </head>
 <body>
 <header>
@@ -34,9 +34,33 @@
     </div>
   </nav>
 </header>
-  <main class="home-hero">
-    <h1>Военмех<span >.ЕДА</span></h1>
-    <a href="catalog.html" class="btn">Открыть каталог</a>
+
+  <main>
+    <h1>Корзина и оформление заказа</h1>
+
+    <section class="checkout-form">
+      <h2>Состав заказа</h2>
+      <div class="cart-items">
+        <p>Загрузка...</p>
+      </div>
+      <div class="checkout-summary">
+        <p>Подытог: Загрузка ₽</p>
+        <p class="total">Итого: Загрузка ₽</p>
+      </div>
+    </section>
+
+    <form id="order-form" class="checkout-form">
+      <h2>Доставка</h2>
+      <div class="form-group">
+        <label>
+        Адрес доставки 
+      </label>
+      <textarea  id="address-input" placeholder="ул. Примерная, д. 10" required></textarea>
+      </div>
+      <div class="form-group">
+        <button type="submit">Оформить заказ</button>
+      </div>
+    </form>
   </main>
 
   <footer>

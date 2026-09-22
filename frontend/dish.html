@@ -4,10 +4,11 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Ресторан "Военмех .ЕДА"</title>
-  <link rel="stylesheet" href="../css/style.css">
-  <script src="../js/cart.js" defer></script>
-  <script src="../js/auth.js" defer></script>
-
+  <link rel="stylesheet" href="/css/style.css">
+  <script src="/js/cart.js" defer></script>
+  <script src="/js/dish.js" defer></script>
+  <script src="/js/auth.js" defer></script>
+  
 </head>
 <body>
 <header>
@@ -33,17 +34,33 @@
       </div>
     </div>
   </nav>
-</header>
+</header> 
 
-  <main>
-    <h1>История заказов</h1>
+  <main class="dish-detail">
+    <section>
+    <h1>Пицца «Четыре сыра»</h1>
 
-    <div class="orders-list">
-
+    <img src="data:image/svg+xml,%3Csvg viewBox='0 0 400 300' xmlns='http://www.w3.org/2000/svg'%3E%3Crect width='400' height='300' fill='%23e0e0e0'/%3E%3Ctext x='50%' y='50%' fill='%23666' font-size='24'%3EФото блюда%3C/text%3E%3C/svg%3E" alt="Загрузка изображения..." class="dish-image">
+    </section>
+    <section>
+    <div class="ingredients">
+      <h2>Ингредиенты</h2>
+      <p>
+        Загрузка...
+      </p>
+      <p>
+        Загрузка...
+      </p>
+      <p>
+        Загрузка...
+      </p>
     </div>
+    <div class="dish-footer">
+      <span class="dish-price">Загрузка... ₽</span>
+      <button class="dish-btn" data-id="${dish.id}">В корзину</button>
+    </div>
+    </section>
   </main>
-
-  <script src="../js/orderslist.js" defer></script>
 
   <footer>
     <small>© 2026 Ресторан "Военмех .ЕДА". Все права защищены.</small>
