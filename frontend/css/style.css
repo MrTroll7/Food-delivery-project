@@ -686,8 +686,8 @@ nav {
   header {
     padding: 1rem;
   }
-  .nav-links, .profile-dropdown {
-    display: none;
+  .nav {
+    flex-wrap: wrap;
   }
   .home-hero h1 {
     font-size: 2rem;
