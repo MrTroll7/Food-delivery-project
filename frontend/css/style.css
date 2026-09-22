@@ -78,6 +78,8 @@ nav {
   gap: 2rem;
   align-items: center;
   justify-content: space-between;
+  flex-wrap: wrap;
+
 }
 .footer-left{
   display: flex;
@@ -686,9 +688,7 @@ nav {
   header {
     padding: 1rem;
   }
-  .nav {
-    flex-wrap: wrap;
-  }
+
   .home-hero h1 {
     font-size: 2rem;
   }
