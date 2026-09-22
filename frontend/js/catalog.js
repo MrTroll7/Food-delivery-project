@@ -1,59 +1,93 @@
-let allDishes = []; 
+const catalogGrid = document.querySelector('.catalog-grid');
+const cuisineFilter = document.getElementById('cuisine-filter');
 const ServerURL='/api';
-const catalogContainer = document.querySelector('.catalog-grid');
 
+
+let allDishes = []; // Массив для хранения всех загруженных блюд
+
+// 1. Загрузка позиций из БД / API
 async function loadDishes() {
   try {
-    const response = await fetch(`${ServerURL}/dishes`);
-    const data = await response.json();
-    
-    allDishes = data.map(item => ({
-      id: item.id,
-      title: item.title,
-      price: item.price, 
-      category: item.category,
-      image: item.image
-    }));
+    const response = await fetch(`${ServerURL}/dishes`); // Укажите ваш URL эндпоинта
+    allDishes = await response.json();
 
-    renderCatalog(allDishes);
+    populateCuisineFilter(allDishes);
+
+    renderDishes(allDishes);
   } catch (error) {
-    catalogContainer.innerHTML = '<p class="error">Ошибка загрузки меню. Попробуйте позже.</p>';
+    console.error('Ошибка при загрузке блюд:', error);
   }
 }
 
-function renderCatalog(dishes) {
-  catalogContainer.innerHTML = '';
+function populateCuisineFilter(dishes) {
+  if (!cuisineFilter) return;
+
+  const cuisines = [...new Set(
+    dishes
+      .map(dish => dish.category) // Поле кухни из БД
+      .filter(Boolean) // Исключаем пустые значения/null
+  )];
+
+  cuisineFilter.innerHTML = '<option value="all">Все кухни</option>';
+
+  cuisines.forEach(cuisine => {
+    const option = document.createElement('option');
+    option.value = cuisine;
+    option.textContent = cuisine;
+    cuisineFilter.appendChild(option);
+  });
+}
+
+function renderDishes(dishes) {
+  if (!catalogGrid) return;
+  catalogGrid.innerHTML = '';
 
   if (dishes.length === 0) {
-    catalogContainer.innerHTML = '<p>Ничего не найдено</p>';
+    catalogGrid.innerHTML = '<p style="grid-column: 1/-1; text-align: center; color: #666;">Блюда не найдены</p>';
     return;
   }
 
   dishes.forEach(dish => {
-    const card = document.createElement('article');
-    card.className = 'dish-card';
-    card.innerHTML =`
-        <a href="dish.html?id=${dish.id}" class="dish-link">
-        <img src="${ServerURL}${dish.image}" alt="${dish.title}" loading="lazy">
-        <div class="dish-info">
-            <h3>${dish.title}</h3>
-            <p>Кухня: ${dish.category}</p>
-        </div>
-        </a>
-        <div class="dish-footer">
-            <span class="dish-price">${dish.price} ₽</span>
-            <button class="dish-btn" data-id="${dish.id}">В корзину</button>
-        </div>   
-    `
+  const card = document.createElement('article');
+  card.className = 'dish-card';
+  card.innerHTML =`
+      <a href="dish.html?id=${dish.id}" class="dish-link">
+      <img src="${ServerURL}${dish.image}" alt="${dish.title}" loading="lazy">
+      <div class="dish-info">
+          <h3>${dish.title}</h3>
+          <p>Кухня: ${dish.category}</p>
+      </div>
+      </a>
+      <div class="dish-footer">
+          <span class="dish-price">${dish.price} ₽</span>
+          <button class="dish-btn" data-id="${dish.id}">В корзину</button>
+      </div>   
+  `
 
-    ;
+  ;
 
-    card.querySelector('.dish-btn').addEventListener('click', () => {
-      addToCart(dish);
-    });
+  card.querySelector('.dish-btn').addEventListener('click', () => {
+    addToCart(dish);
+  });
 
-    catalogContainer.appendChild(card);
+  catalogGrid.appendChild(card);
   });
 }
 
+// 4. Обработчик события изменения выбранной кухни
+if (cuisineFilter) {
+  cuisineFilter.addEventListener('change', (e) => {
+    const selectedCuisine = e.target.value;
+
+    if (selectedCuisine === 'all') {
+      renderDishes(allDishes);
+    } else {
+      const filteredDishes = allDishes.filter(dish => 
+        dish.category === selectedCuisine
+      );
+      renderDishes(filteredDishes);
+    }
+  });
+}
+loadDishes();
 document.addEventListener('DOMContentLoaded', loadDishes);

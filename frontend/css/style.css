@@ -196,6 +196,10 @@ nav {
 
 /* Home */
 .home-hero {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.25), rgba(0, 0, 0, 0.25)), url('../images/background.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
   min-height: 85vh;
   display: flex;
   flex-direction: column;
@@ -205,10 +209,23 @@ nav {
   padding: 2rem;
 }
 
+
 .home-hero h1 {
+  background: rgba(255, 255, 255, 0.8);
+  padding: 0.8rem 1.6rem;
+  border-radius: 8px;
   font-size: 3rem;
   margin-bottom: 1rem;
   color: var(--text-color);
+}
+
+.hero-slogan {
+  background: rgba(255, 255, 255, 0.8);
+  padding: 0.8rem 1.6rem;
+  border-radius: 8px;
+  font-size: 1.2rem;
+  margin-bottom: 2rem;
+  color: #000000;
 }
 
 .btn {
@@ -305,6 +322,40 @@ nav {
 .dish-btn:hover {
   background: var(--accent-color);
   color: white;
+}
+/* Catalog Filters */
+.catalog-filters {
+  max-width: 1200px;
+  margin: 0 auto 1.5rem;
+  padding: 0 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.8rem;
+}
+
+.catalog-filters label {
+  font-weight: 500;
+  font-size: 0.95rem;
+  color: var(--text-color);
+}
+
+.catalog-filters select {
+  padding: 0.5rem 1rem;
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  background-color: var(--card-bg);
+  color: var(--text-color);
+  font-size: 0.95rem;
+  font-family: inherit;
+  cursor: pointer;
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.catalog-filters select:focus {
+  border-color: var(--accent-color);
+  box-shadow: 0 0 0 3px rgba(232, 73, 73, 0.1);
 }
 
 /* Dish Detail */
